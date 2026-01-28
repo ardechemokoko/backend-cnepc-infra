@@ -116,6 +116,11 @@ services:
       CAPTCHA_BACKGROUND: "#f5f5f5"
       CAPTCHA_TEXT_COLOR: "#1a1a1a"
       CAPTCHA_NOISE: 30
+
+      AIRTEL_SMS_HOST: https://messaging.airtel.ga:9002/smshttpquery/qs
+      AIRTEL_SMS_USERNAME: RANGUS
+      AIRTEL_SMS_PASSWORD: Dec@9080
+      AIRTEL_SMS_SENDER_ID: DGTT
       
       # VAPID (Web Push Notifications)
       VAPID_PUBLIC_KEY: BNhOSbppnYNeuxZ8l8G5XBe7nqiPWAMvLns70z41-4zm20xN2jVbhqkGU5qbSLjiYlO-20wt38aUVVF6uvicH6E
