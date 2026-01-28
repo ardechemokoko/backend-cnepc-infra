@@ -1,0 +1,139 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: backend-cnepc-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: cnepc_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5440:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: backend-cnepc-redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend-network
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    image: ghcr.io/ardechemokoko/backend-cnepc:latest
+    container_name: backend-cnepc-app
+    restart: unless-stopped
+    ports:
+      - "8004:8000"
+    environment:
+      # Variables d'environnement du container - elles dominent
+      # Laravel App
+      APP_NAME: CNEPC
+      APP_ENV: local
+      APP_KEY: base64:AGDIfwfRUKYRdvfOP3APMxnTzxeHiNeGCRQEu723+8E=
+      APP_DEBUG: true
+      APP_URL: http://localhost:8004
+      
+      # Base de données PostgreSQL (Laravel)
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: cnepc_db
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/cnepc_db
+      
+      # Redis (Laravel)
+      REDIS_HOST: redis
+      REDIS_PASSWORD: null
+      REDIS_PORT: 6379
+      REDIS_DB: 0
+      REDIS_URL: redis://redis:6379
+      
+      # Cache & Session (Laravel)
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      QUEUE_CONNECTION: redis
+      
+      # Alfresco
+      ALFRESCO_URL: http://10.0.156.51:8080
+      ALFRESCO_USER: admin
+      ALFRESCO_PASS: admin
+      
+      # Mail
+      MAIL_MAILER: smtp
+      MAIL_HOST: mail.presidence.ga
+      MAIL_PORT: 587
+      MAIL_USERNAME: test@presidence.ga
+      MAIL_PASSWORD: "G[Fr6B)j77&ti7"
+      MAIL_ENCRYPTION: TLS
+      MAIL_FROM_ADDRESS: no-reply@aninf.ga
+      MAIL_FROM_NAME: "CNEPC"
+      
+      # AWS
+      AWS_ACCESS_KEY_ID: ""
+      AWS_SECRET_ACCESS_KEY: ""
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_BUCKET: ""
+      AWS_USE_PATH_STYLE_ENDPOINT: false
+      
+      # Vite
+      VITE_APP_NAME: "CNEPC"
+      
+      # Authentik
+      AUTHENTIK_BASE_URL: http://62.171.169.115:9000/
+      AUTHENTIK_CLIENT_ID: qj4BAO4DbXowaabCETux90590xaNQAhy6QOe8VTn
+      AUTHENTIK_CLIENT_SECRET: PpHTbNWMOqehy83PmRyukLIvcIfFKYvKU2sskYw5mir1Ggpb5loFVhUdItgP3afI9BMLfsESgzIHwiuXZ9bGx5PY2Wcp9uejiinxSk9X6rPm2psZwJ8He3AMaJxjpru8
+      AUTHENTIK_REDIRECT_URI: http://62.171.169.115:9000/api/auth/authentik/callback
+      AUTHENTIK_API_TOKEN: srnuJY2CMPzFdT8JT2mxQWzPNAaALAK5fGa2XnLvab26AjbrdCxQDfvvxplb
+      
+      # CNEDDT API
+      CNEDDT_API_URL: https://backend-permis.application-dev.site/api/v1/external/driving-license
+      CNEDDT_API_KEY: ext_a3f7b2c1d5e8f1a29b3c4d5e6f7a8b9c
+      
+      # Captcha
+      CAPTCHA_LENGTH: 6
+      CAPTCHA_WIDTH: 160
+      CAPTCHA_HEIGHT: 60
+      CAPTCHA_TTL: 120
+      CAPTCHA_BACKGROUND: "#f5f5f5"
+      CAPTCHA_TEXT_COLOR: "#1a1a1a"
+      CAPTCHA_NOISE: 30
+      
+      # VAPID (Web Push Notifications)
+      VAPID_PUBLIC_KEY: BNhOSbppnYNeuxZ8l8G5XBe7nqiPWAMvLns70z41-4zm20xN2jVbhqkGU5qbSLjiYlO-20wt38aUVVF6uvicH6E
+      VAPID_PRIVATE_KEY: I_KkpI3evNaheP4KASPx2_s392NF_05mey4xYnZZ8aw
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - backend-network
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  backend-network:
+    driver: bridge
