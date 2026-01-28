@@ -24,7 +24,7 @@ services:
     container_name: backend-cnepc-redis
     restart: unless-stopped
     ports:
-      - "6380:6379"
+      - "6382:6379"
     volumes:
       - redis_data:/data
     networks:
@@ -73,7 +73,7 @@ services:
       QUEUE_CONNECTION: redis
       
       # Alfresco
-      ALFRESCO_URL: http://10.0.156.51:8080
+      ALFRESCO_URL: http://62.171.169.115:8080
       ALFRESCO_USER: admin
       ALFRESCO_PASS: admin
       
