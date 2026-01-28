@@ -49,7 +49,7 @@ services:
       APP_ENV: local
       APP_KEY: base64:AGDIfwfRUKYRdvfOP3APMxnTzxeHiNeGCRQEu723+8E=
       APP_DEBUG: true
-      APP_URL: http://localhost:8004
+      APP_URL: http://http://62.171.169.115:8004
       
       # Base de données PostgreSQL (Laravel)
       DB_CONNECTION: pgsql
