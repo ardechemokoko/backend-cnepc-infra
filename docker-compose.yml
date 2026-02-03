@@ -50,7 +50,7 @@ services:
       APP_ENV: local
       APP_KEY: base64:AGDIfwfRUKYRdvfOP3APMxnTzxeHiNeGCRQEu723+8E=
       APP_DEBUG: true
-      APP_URL: http://62.171.169.115:8004
+      APP_URL: http://86.48.5.209:8004
       
       # Base de données PostgreSQL (Laravel)
       DB_CONNECTION: pgsql
@@ -80,13 +80,11 @@ services:
       
       # Mail
       MAIL_MAILER: smtp
-      MAIL_HOST: mail.presidence.ga
-      MAIL_PORT: 587
-      MAIL_USERNAME: test@presidence.ga
-      MAIL_PASSWORD: "G[Fr6B)j77&ti7"
-      MAIL_ENCRYPTION: TLS
-      MAIL_FROM_ADDRESS: no-reply@aninf.ga
-      MAIL_FROM_NAME: "CNEPC"
+      MAIL_HOST: sandbox.smtp.mailtrap.io
+      MAIL_PORT: 2525
+      MAIL_USERNAME: 7cbb472a90865a
+      MAIL_PASSWORD: c8456fa8e965eb
+      MAIL_ENCRYPTION: tls
       
       # AWS
       AWS_ACCESS_KEY_ID: ""
