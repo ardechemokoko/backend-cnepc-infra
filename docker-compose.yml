@@ -8,7 +8,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5440:5432"
+      - "5450:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -40,8 +40,9 @@ services:
     image: ghcr.io/ardechemokoko/backend-cnepc:latest
     container_name: backend-cnepc-app
     restart: unless-stopped
+    command: ["sh", "-c", "php artisan queue:work --sleep=3 --tries=3 & exec php artisan serve --host=0.0.0.0 --port=8000"]
     ports:
-      - "8004:8000"
+      - "8006:8000"
     environment:
       # Variables d'environnement du container - elles dominent
       # Laravel App
@@ -107,6 +108,9 @@ services:
       # CNEDDT API
       CNEDDT_API_URL: https://backend-permis.application-dev.site/api/v1/external/driving-license
       CNEDDT_API_KEY: ext_a3f7b2c1d5e8f1a29b3c4d5e6f7a8b9c
+
+      #########EDI DGDI
+      DGDI_BASE_URL: https://edgdi.dgdi.ga/be
       
       # Captcha
       CAPTCHA_LENGTH: 6
