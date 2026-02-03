@@ -97,11 +97,11 @@ services:
       VITE_APP_NAME: "CNEPC"
       
       # Authentik
-      AUTHENTIK_BASE_URL: http://62.171.169.115:9000/
-      AUTHENTIK_CLIENT_ID: qj4BAO4DbXowaabCETux90590xaNQAhy6QOe8VTn
-      AUTHENTIK_CLIENT_SECRET: PpHTbNWMOqehy83PmRyukLIvcIfFKYvKU2sskYw5mir1Ggpb5loFVhUdItgP3afI9BMLfsESgzIHwiuXZ9bGx5PY2Wcp9uejiinxSk9X6rPm2psZwJ8He3AMaJxjpru8
-      AUTHENTIK_REDIRECT_URI: http://62.171.169.115:9000/api/auth/authentik/callback
-      AUTHENTIK_API_TOKEN: srnuJY2CMPzFdT8JT2mxQWzPNAaALAK5fGa2XnLvab26AjbrdCxQDfvvxplb
+      AUTHENTIK_BASE_URL: http://86.48.5.209:9000/                                                                                                                                                                                                                  
+      AUTHENTIK_CLIENT_ID: IxMKOfPuW3lVbSwGxpXSgpcptbrekbXc6KUk8sQ9                                                                                                                                                                                                        
+      AUTHENTIK_CLIENT_SECRET: UHpF4Y1wNAghsT9Ysu9axnrdn8hgxwKNBc0RriKs5DwwdNPeeicxQa7POzSSLkZZanwAcYyT0vCd8YwCCohWDqS68QujCc1ICMlKUUGObP7FN0wgFOFMvsfMiqQgDYWL                                                                                                            
+      AUTHENTIK_REDIRECT_URI: http://62.171.169.115:9000/api/auth/authentik/callback                                                                                                                                                                                   
+      AUTHENTIK_API_TOKEN: xZsEQBhRrAk26DVlr504onOmOgttZpCeGO0AWVuREbV1XrDsLiKwKcT7GQ2E
       
       # CNEDDT API
       CNEDDT_API_URL: https://backend-permis.application-dev.site/api/v1/external/driving-license
