@@ -104,7 +104,7 @@ services:
       AUTHENTIK_API_TOKEN: xZsEQBhRrAk26DVlr504onOmOgttZpCeGO0AWVuREbV1XrDsLiKwKcT7GQ2E
       
       # CNEDDT API
-      CNEDDT_API_URL: https://backend-permis.application-dev.site/api/v1/external/driving-license
+      CNEDDT_API_URL: https://backend-cneddt.application-dev.site/api/v1/external/driving-license
       CNEDDT_API_KEY: ext_a3f7b2c1d5e8f1a29b3c4d5e6f7a8b9c
 
       #########EDI DGDI
