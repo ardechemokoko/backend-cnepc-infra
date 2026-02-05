@@ -127,6 +127,8 @@ services:
       # VAPID (Web Push Notifications)
       VAPID_PUBLIC_KEY: BNhOSbppnYNeuxZ8l8G5XBe7nqiPWAMvLns70z41-4zm20xN2jVbhqkGU5qbSLjiYlO-20wt38aUVVF6uvicH6E
       VAPID_PRIVATE_KEY: I_KkpI3evNaheP4KASPx2_s392NF_05mey4xYnZZ8aw
+      PAYNALA_API_KEY: f5d929362e75b0caba644a9237150ae1c4cbb9efaefe5471e8fe66d4ca2d9dd7
+      PAYNALA_BASE_URL: https://api.paynala.com/functions/v1
     depends_on:
       postgres:
         condition: service_healthy
